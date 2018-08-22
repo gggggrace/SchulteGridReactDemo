@@ -100,21 +100,28 @@ class App extends Component {
             })
         }
         setTimeout(function () {
-            arr[index].color = '';
-            self.setState({
-                cells:arr
-            })
+            if(self.state.dur!=="0"){
+                arr[index].color = '';
+                self.setState({
+                    cells:arr
+                })
+            }
         }, 1000);
     };
     // 重启
     restartBtn = () => {
-        this.randomSort();
-        this.timeCount();
+        let arr = this.state.cells.map(function (cell,index) {
+           return cell.color = '';
+        });
         this.setState({
+            cells:arr,
             restart:"Restart",
             time:"00:00",
-            dur:"0"
+            dur:"0",
+            order:0
         });
+        this.randomSort();
+        this.timeCount();
     };
 
     componentDidMount(){
